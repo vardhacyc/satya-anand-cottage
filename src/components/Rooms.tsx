@@ -2,7 +2,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Wifi, Car, Coffee, Tv, Wind, Users, Bed, Bath } from "lucide-react";
-import cottageRoom from "@/assets/cottage-room.jpg";
 
 const Rooms = () => {
   const scrollToContact = () => {
@@ -21,7 +20,8 @@ const Rooms = () => {
       capacity: "2 Adults",
       size: "350 sq ft",
       amenities: ["Mountain View", "AC", "WiFi", "Tea/Coffee", "TV", "Balcony"],
-      features: ["1 King Bed", "1 Bathroom", "Private Balcony"]
+      features: ["1 King Bed", "1 Bathroom", "Private Balcony"],
+      image: "/lovable-uploads/210e942e-c3b7-41c5-8153-d5801e026110.png"
     },
     {
       id: 2,
@@ -31,7 +31,8 @@ const Rooms = () => {
       capacity: "4 Adults + 2 Children",
       size: "550 sq ft",
       amenities: ["Valley View", "AC", "WiFi", "Kitchenette", "TV", "Dining Area"],
-      features: ["2 Bedrooms", "2 Bathrooms", "Living Room", "Kitchenette"]
+      features: ["2 Bedrooms", "2 Bathrooms", "Living Room", "Kitchenette"],
+      image: "/lovable-uploads/a344e0f6-1cd8-4d5b-ac30-8c9170c82b73.png"
     },
     {
       id: 3,
@@ -41,7 +42,8 @@ const Rooms = () => {
       capacity: "2 Adults",
       size: "280 sq ft",
       amenities: ["Garden View", "Fan", "WiFi", "Tea/Coffee", "Shared Balcony"],
-      features: ["1 Queen Bed", "1 Bathroom", "Garden Access"]
+      features: ["1 Queen Bed", "1 Bathroom", "Garden Access"],
+      image: "/lovable-uploads/074e847d-d7e1-4db0-9286-df033d8161f0.png"
     }
   ];
 
@@ -69,15 +71,16 @@ const Rooms = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
-          {rooms.map((room) => (
-            <Card key={room.id} className="overflow-hidden border-0 shadow-soft hover:shadow-mountain transition-all duration-300 hover:-translate-y-1">
-              <div className="relative">
+          {rooms.map((room, index) => (
+            <Card key={room.id} className="overflow-hidden border-0 shadow-soft hover:shadow-elegant transition-all duration-500 hover:-translate-y-2 rounded-3xl bg-card/80 backdrop-blur-sm animate-fade-up group" style={{ animationDelay: `${index * 0.2}s` }}>
+              <div className="relative overflow-hidden">
                 <img 
-                  src={cottageRoom} 
+                  src={room.image} 
                   alt={room.name}
-                  className="w-full h-64 object-cover"
+                  className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
                 />
-                <Badge className="absolute top-4 right-4 bg-primary text-primary-foreground">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <Badge className="absolute top-4 right-4 glass-morphism text-white border-white/20">
                   {room.capacity}
                 </Badge>
               </div>
@@ -124,7 +127,7 @@ const Rooms = () => {
 
                 <Button 
                   onClick={scrollToContact} 
-                  className="w-full shadow-soft"
+                  className="w-full bg-gradient-primary hover:shadow-mountain transition-all duration-300 hover:scale-105 rounded-xl"
                 >
                   Book This Room
                 </Button>
@@ -134,17 +137,17 @@ const Rooms = () => {
         </div>
 
         {/* All Amenities */}
-        <div className="bg-card rounded-3xl p-8 shadow-soft">
-          <h3 className="text-2xl font-bold text-card-foreground text-center mb-8">
+        <div className="glass-morphism rounded-3xl p-8 shadow-glass">
+          <h3 className="text-2xl font-bold text-card-foreground text-center mb-8 animate-fade-up">
             All Rooms Include
           </h3>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
             {allAmenities.map((amenity, index) => (
-              <div key={index} className="text-center">
-                <div className="w-12 h-12 bg-gradient-to-br from-primary/10 to-mountain-green/10 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <amenity.icon className="h-6 w-6 text-primary" />
+              <div key={index} className="text-center group animate-scale-in" style={{ animationDelay: `${index * 0.1}s` }}>
+                <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mx-auto mb-3 transition-all duration-300 group-hover:scale-110 group-hover:shadow-mountain">
+                  <amenity.icon className="h-7 w-7 text-white" />
                 </div>
-                <p className="text-sm text-muted-foreground">{amenity.name}</p>
+                <p className="text-sm text-muted-foreground font-medium">{amenity.name}</p>
               </div>
             ))}
           </div>

@@ -58,11 +58,11 @@ const Amenities = () => {
     <section id="amenities" className="py-20 bg-gradient-to-b from-mountain-cream to-background">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6 animate-fade-up">
             Amenities & Services
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-primary to-mountain-green mx-auto mb-6"></div>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <div className="w-24 h-1 bg-gradient-primary mx-auto mb-6 animate-fade-up" style={{ animationDelay: '0.2s' }}></div>
+          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto animate-fade-up" style={{ animationDelay: '0.4s' }}>
             Experience comfort and convenience with our comprehensive range of amenities 
             designed to make your stay memorable and relaxing.
           </p>
@@ -121,11 +121,11 @@ const Amenities = () => {
         {/* Other Amenities Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {amenities.slice(1).map((amenity, index) => (
-            <Card key={index} className="border-0 shadow-soft hover:shadow-mountain transition-all duration-300 hover:-translate-y-1">
+            <Card key={index} className="border-0 shadow-soft hover:shadow-elegant transition-all duration-500 hover:-translate-y-2 rounded-3xl glass-morphism group animate-scale-in" style={{ animationDelay: `${index * 0.1}s` }}>
               <CardContent className="p-6">
                 <div className="flex items-center mb-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-primary/10 to-mountain-green/10 rounded-full flex items-center justify-center mr-4">
-                    <amenity.icon className="h-6 w-6 text-primary" />
+                  <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mr-4 transition-all duration-300 group-hover:scale-110">
+                    <amenity.icon className="h-8 w-8 text-white" />
                   </div>
                   <h3 className="text-lg font-semibold text-card-foreground">{amenity.title}</h3>
                 </div>
