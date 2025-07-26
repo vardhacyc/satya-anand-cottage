@@ -69,8 +69,8 @@ const Contact = () => {
               <CardContent>
                 <p className="text-muted-foreground mb-4">
                   Satya Anand Cottage<br />
-                  Upper Coonoor Road<br />
-                  Coonoor, Tamil Nadu 643101<br />
+                  Brooklands Rd, Alwarpet<br />
+                  Coonoor, Tamil Nadu 643103<br />
                   India
                 </p>
                 <p className="text-sm text-muted-foreground">
@@ -88,8 +88,7 @@ const Contact = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-muted-foreground">+91 98765 43210</p>
-                  <p className="text-muted-foreground">+91 98765 43211</p>
+                  <p className="text-muted-foreground">+91 9892701200</p>
                 </CardContent>
               </Card>
 
@@ -173,7 +172,7 @@ const Contact = () => {
                     type="tel"
                     value={formData.phone}
                     onChange={handleChange}
-                    placeholder="+91 98765 43210"
+                    placeholder="+91 9892701200"
                     required
                   />
                 </div>
