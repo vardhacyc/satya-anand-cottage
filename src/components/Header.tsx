@@ -45,7 +45,7 @@ const Header = () => {
           <div className="hidden lg:flex items-center space-x-4">
             <div className="flex items-center space-x-2 text-sm text-muted-foreground">
               <Phone className="h-4 w-4" />
-              <span>+91 98765 43210</span>
+              <span>+9198927 01200</span>
             </div>
             <Button onClick={() => scrollToSection('contact')} className="shadow-soft">
               Book Now
@@ -82,7 +82,7 @@ const Header = () => {
               </button>
               <div className="flex items-center space-x-2 text-sm text-muted-foreground pt-2">
                 <Phone className="h-4 w-4" />
-                <span>+91 98765 43210</span>
+                <span>+9198927 01200</span>
               </div>
               <Button onClick={() => scrollToSection('contact')} className="self-start">
                 Book Now

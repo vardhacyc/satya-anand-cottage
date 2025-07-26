@@ -82,13 +82,13 @@ const Footer = () => {
               <div className="flex items-start">
                 <MapPin className="h-4 w-4 mt-1 mr-2 text-primary flex-shrink-0" />
                 <div className="text-sm">
-                  Upper Coonoor Road<br />
-                  Coonoor, Tamil Nadu 643101
+                  Brooklands Rd, Alwarpet<br />
+                  Coonoor, Tamil Nadu 643103
                 </div>
               </div>
               <div className="flex items-center">
                 <Phone className="h-4 w-4 mr-2 text-primary" />
-                <span className="text-sm">+91 98765 43210</span>
+                <span className="text-sm">+9198927 01200</span>
               </div>
               <div className="flex items-center">
                 <Mail className="h-4 w-4 mr-2 text-primary" />

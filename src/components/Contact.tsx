@@ -20,10 +20,33 @@ const Contact = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Create WhatsApp message with booking details
+    const message = `Hello! I would like to make a reservation at Satya Anand Cottage.
+
+*Booking Details:*
+Name: ${formData.name}
+Email: ${formData.email}
+Phone: ${formData.phone}
+Check-in: ${formData.checkIn}
+Check-out: ${formData.checkOut}
+Guests: ${formData.guests || 'Not specified'}
+Special Requests: ${formData.message || 'None'}
+
+Please confirm availability and send booking details.`;
+
+    const phoneNumber = "+919892701200";
+    const whatsappUrl = `https://wa.me/${phoneNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(message)}`;
+    
+    // Open WhatsApp
+    window.open(whatsappUrl, '_blank');
+    
     toast({
-      title: "Booking Request Sent!",
-      description: "We'll contact you soon to confirm your reservation.",
+      title: "Redirecting to WhatsApp!",
+      description: "Your booking details have been prepared. Complete your reservation via WhatsApp.",
     });
+    
+    // Reset form
     setFormData({
       name: "",
       email: "",
@@ -69,8 +92,8 @@ const Contact = () => {
               <CardContent>
                 <p className="text-muted-foreground mb-4">
                   Satya Anand Cottage<br />
-                  Upper Coonoor Road<br />
-                  Coonoor, Tamil Nadu 643101<br />
+                  Brooklands Rd, Alwarpet<br />
+                  Coonoor, Tamil Nadu 643103<br />
                   India
                 </p>
                 <p className="text-sm text-muted-foreground">
@@ -88,8 +111,7 @@ const Contact = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-muted-foreground">+91 98765 43210</p>
-                  <p className="text-muted-foreground">+91 98765 43211</p>
+                  <p className="text-muted-foreground">+9198927 01200</p>
                 </CardContent>
               </Card>
 
@@ -173,7 +195,7 @@ const Contact = () => {
                     type="tel"
                     value={formData.phone}
                     onChange={handleChange}
-                    placeholder="+91 98765 43210"
+                    placeholder="+9198927 01200"
                     required
                   />
                 </div>
@@ -236,8 +258,8 @@ const Contact = () => {
                   />
                 </div>
 
-                <Button type="submit" className="w-full text-lg py-6 shadow-soft">
-                  Send Booking Request
+                <Button type="submit" className="w-full text-lg py-6 shadow-soft bg-green-600 hover:bg-green-700 text-white">
+                  Book via WhatsApp
                 </Button>
               </form>
             </CardContent>
