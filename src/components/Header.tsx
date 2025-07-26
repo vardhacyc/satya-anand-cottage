@@ -36,6 +36,9 @@ const Header = () => {
             <button onClick={() => scrollToSection('amenities')} className="text-foreground hover:text-primary transition-colors">
               Amenities
             </button>
+            <button onClick={() => scrollToSection('reviews')} className="text-foreground hover:text-primary transition-colors">
+              Reviews
+            </button>
             <button onClick={() => scrollToSection('contact')} className="text-foreground hover:text-primary transition-colors">
               Contact
             </button>
@@ -45,7 +48,7 @@ const Header = () => {
           <div className="hidden lg:flex items-center space-x-4">
             <div className="flex items-center space-x-2 text-sm text-muted-foreground">
               <Phone className="h-4 w-4" />
-              <span>+91 98765 43210</span>
+              <span>+91 9892701200</span>
             </div>
             <Button onClick={() => scrollToSection('contact')} className="shadow-soft">
               Book Now
@@ -77,12 +80,15 @@ const Header = () => {
               <button onClick={() => scrollToSection('amenities')} className="text-left text-foreground hover:text-primary transition-colors">
                 Amenities
               </button>
+              <button onClick={() => scrollToSection('reviews')} className="text-left text-foreground hover:text-primary transition-colors">
+                Reviews
+              </button>
               <button onClick={() => scrollToSection('contact')} className="text-left text-foreground hover:text-primary transition-colors">
                 Contact
               </button>
               <div className="flex items-center space-x-2 text-sm text-muted-foreground pt-2">
                 <Phone className="h-4 w-4" />
-                <span>+91 98765 43210</span>
+                <span>+91 9892701200</span>
               </div>
               <Button onClick={() => scrollToSection('contact')} className="self-start">
                 Book Now
