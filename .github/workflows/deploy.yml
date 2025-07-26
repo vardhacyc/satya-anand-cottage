@@ -31,9 +31,20 @@ jobs:
         run: npm ci
         
       - name: Build
-        run: NODE_ENV=production npm run build
+        run: npm run build
         env:
           NODE_ENV: production
+          
+      - name: List build output
+        run: ls -la dist/
+        
+      - name: Check build files
+        run: |
+          echo "Checking index.html content:"
+          head -20 dist/index.html
+          
+      - name: Remove source index.html to prevent conflicts
+        run: rm -f index.html
         
       - name: Setup Pages
         uses: actions/configure-pages@v4
