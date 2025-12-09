@@ -1,9 +1,19 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Phone, Mail } from "lucide-react";
+import { Menu, X, Phone } from "lucide-react";
+import Logo from "./Logo";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -13,49 +23,66 @@ const Header = () => {
     setIsMenuOpen(false);
   };
 
+  const navItems = [
+    { id: 'home', label: 'Home' },
+    { id: 'about', label: 'About' },
+    { id: 'rooms', label: 'Rooms' },
+    { id: 'amenities', label: 'Amenities' },
+    { id: 'contact', label: 'Contact' }
+  ];
+
   return (
-    <header className="fixed top-0 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-50 border-b">
-      <div className="container mx-auto px-4 py-4">
+    <header className={`fixed top-0 w-full z-50 transition-all duration-500 ${isScrolled
+        ? 'bg-background/95 backdrop-blur-lg shadow-soft border-b border-border/50'
+        : 'bg-transparent'
+      }`}>
+      <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <h1 className="text-2xl font-bold text-primary">Satya Anand Cottage</h1>
-            <span className="text-sm text-muted-foreground hidden sm:block">Pure Veg • Non-Alcoholic</span>
-          </div>
+          {/* Logo */}
+          <button onClick={() => scrollToSection('home')} className="focus:outline-none">
+            <Logo size="md" showText={true} />
+          </button>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            <button onClick={() => scrollToSection('home')} className="text-foreground hover:text-primary transition-colors">
-              Home
-            </button>
-            <button onClick={() => scrollToSection('about')} className="text-foreground hover:text-primary transition-colors">
-              About
-            </button>
-            <button onClick={() => scrollToSection('rooms')} className="text-foreground hover:text-primary transition-colors">
-              Rooms
-            </button>
-            <button onClick={() => scrollToSection('amenities')} className="text-foreground hover:text-primary transition-colors">
-              Amenities
-            </button>
-            <button onClick={() => scrollToSection('contact')} className="text-foreground hover:text-primary transition-colors">
-              Contact
-            </button>
+          <nav className="hidden md:flex items-center space-x-1">
+            {navItems.map((item) => (
+              <button
+                key={item.id}
+                onClick={() => scrollToSection(item.id)}
+                className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 ${isScrolled
+                    ? 'text-foreground hover:text-primary hover:bg-primary/5'
+                    : 'text-white/90 hover:text-white hover:bg-white/10'
+                  }`}
+              >
+                {item.label}
+              </button>
+            ))}
           </nav>
 
           {/* Contact Info & Book Button */}
           <div className="hidden lg:flex items-center space-x-4">
-            <div className="flex items-center space-x-2 text-sm text-muted-foreground">
+            <a
+              href="tel:+919892701200"
+              className={`flex items-center space-x-2 text-sm transition-colors ${isScrolled ? 'text-muted-foreground hover:text-primary' : 'text-white/80 hover:text-white'
+                }`}
+            >
               <Phone className="h-4 w-4" />
-              <span>+9198927 01200</span>
-            </div>
-            <Button onClick={() => scrollToSection('contact')} className="shadow-soft">
+              <span>+91 98927 01200</span>
+            </a>
+            <Button
+              onClick={() => scrollToSection('contact')}
+              className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary shadow-soft hover:shadow-mountain transition-all duration-300 rounded-xl px-6"
+            >
               Book Now
             </Button>
           </div>
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden"
+            className={`md:hidden p-2 rounded-lg transition-colors ${isScrolled ? 'text-foreground hover:bg-muted' : 'text-white hover:bg-white/10'
+              }`}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle menu"
           >
             {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
@@ -63,30 +90,32 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <nav className="md:hidden mt-4 pb-4 border-t pt-4">
-            <div className="flex flex-col space-y-3">
-              <button onClick={() => scrollToSection('home')} className="text-left text-foreground hover:text-primary transition-colors">
-                Home
-              </button>
-              <button onClick={() => scrollToSection('about')} className="text-left text-foreground hover:text-primary transition-colors">
-                About
-              </button>
-              <button onClick={() => scrollToSection('rooms')} className="text-left text-foreground hover:text-primary transition-colors">
-                Rooms
-              </button>
-              <button onClick={() => scrollToSection('amenities')} className="text-left text-foreground hover:text-primary transition-colors">
-                Amenities
-              </button>
-              <button onClick={() => scrollToSection('contact')} className="text-left text-foreground hover:text-primary transition-colors">
-                Contact
-              </button>
-              <div className="flex items-center space-x-2 text-sm text-muted-foreground pt-2">
-                <Phone className="h-4 w-4" />
-                <span>+9198927 01200</span>
+          <nav className="md:hidden mt-4 pb-4 border-t border-border/50 pt-4 fade-in">
+            <div className="flex flex-col space-y-1">
+              {navItems.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => scrollToSection(item.id)}
+                  className="text-left px-4 py-3 rounded-xl text-foreground hover:text-primary hover:bg-primary/5 transition-all font-medium"
+                >
+                  {item.label}
+                </button>
+              ))}
+              <div className="pt-4 border-t border-border/50 mt-2">
+                <a
+                  href="tel:+919892701200"
+                  className="flex items-center space-x-2 px-4 py-2 text-sm text-muted-foreground hover:text-primary transition-colors"
+                >
+                  <Phone className="h-4 w-4" />
+                  <span>+91 98927 01200</span>
+                </a>
+                <Button
+                  onClick={() => scrollToSection('contact')}
+                  className="w-full mt-3 bg-gradient-to-r from-primary to-primary/80 rounded-xl"
+                >
+                  Book Now
+                </Button>
               </div>
-              <Button onClick={() => scrollToSection('contact')} className="self-start">
-                Book Now
-              </Button>
             </div>
           </nav>
         )}

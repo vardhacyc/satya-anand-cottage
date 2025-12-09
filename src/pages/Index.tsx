@@ -6,14 +6,16 @@ import Amenities from "@/components/Amenities";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import WhatsAppFloat from "@/components/WhatsAppFloat";
+import Preloader from "@/components/Preloader";
 
 const Index = () => {
   return (
     <div className="min-h-screen">
+      <Preloader />
       <Header />
       <Hero />
-      <About />
       <Rooms />
+      <About />
       <Amenities />
       <Contact />
       <Footer />
