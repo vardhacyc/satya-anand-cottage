@@ -332,26 +332,63 @@ Please let me know the rates and availability. Thank you!`;
               <div>
                 <Label htmlFor="checkIn" className="text-foreground">Check-in</Label>
                 <div className="relative mt-1">
-                  <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                  <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none z-10" />
                   <Input
                     id="checkIn"
                     type="date"
                     value={bookingDetails.checkIn}
-                    onChange={(e) => setBookingDetails({ ...bookingDetails, checkIn: e.target.value })}
-                    className="pl-10 bg-background border-border text-foreground"
+                    min={new Date().toISOString().split('T')[0]}
+                    onClick={(e) => (e.target as HTMLInputElement).showPicker?.()}
+                    onChange={(e) => {
+                      const newCheckIn = e.target.value;
+                      const checkInDate = new Date(newCheckIn);
+                      const checkOutDate = new Date(bookingDetails.checkOut);
+
+                      // If checkout is before or same as checkin, adjust checkout to checkin + 1
+                      if (checkOutDate <= checkInDate) {
+                        const nextDay = new Date(checkInDate);
+                        nextDay.setDate(nextDay.getDate() + 1);
+                        setBookingDetails({
+                          ...bookingDetails,
+                          checkIn: newCheckIn,
+                          checkOut: nextDay.toISOString().split('T')[0]
+                        });
+                      } else {
+                        setBookingDetails({ ...bookingDetails, checkIn: newCheckIn });
+                      }
+                    }}
+                    className="pl-10 bg-background border-border text-foreground cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:right-0 [&::-webkit-calendar-picker-indicator]:w-full [&::-webkit-calendar-picker-indicator]:h-full [&::-webkit-calendar-picker-indicator]:cursor-pointer"
                   />
                 </div>
               </div>
               <div>
                 <Label htmlFor="checkOut" className="text-foreground">Check-out</Label>
                 <div className="relative mt-1">
-                  <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                  <Calendar className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none z-10" />
                   <Input
                     id="checkOut"
                     type="date"
                     value={bookingDetails.checkOut}
-                    onChange={(e) => setBookingDetails({ ...bookingDetails, checkOut: e.target.value })}
-                    className="pl-10 bg-background border-border text-foreground"
+                    min={bookingDetails.checkIn}
+                    onClick={(e) => (e.target as HTMLInputElement).showPicker?.()}
+                    onChange={(e) => {
+                      const newCheckOut = e.target.value;
+                      const checkInDate = new Date(bookingDetails.checkIn);
+                      const checkOutDate = new Date(newCheckOut);
+
+                      // If checkout is before or same as checkin, adjust to checkin + 1
+                      if (checkOutDate <= checkInDate) {
+                        const nextDay = new Date(checkInDate);
+                        nextDay.setDate(nextDay.getDate() + 1);
+                        setBookingDetails({
+                          ...bookingDetails,
+                          checkOut: nextDay.toISOString().split('T')[0]
+                        });
+                      } else {
+                        setBookingDetails({ ...bookingDetails, checkOut: newCheckOut });
+                      }
+                    }}
+                    className="pl-10 bg-background border-border text-foreground cursor-pointer [&::-webkit-calendar-picker-indicator]:opacity-0 [&::-webkit-calendar-picker-indicator]:absolute [&::-webkit-calendar-picker-indicator]:right-0 [&::-webkit-calendar-picker-indicator]:w-full [&::-webkit-calendar-picker-indicator]:h-full [&::-webkit-calendar-picker-indicator]:cursor-pointer"
                   />
                 </div>
               </div>
