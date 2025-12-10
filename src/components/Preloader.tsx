@@ -5,12 +5,10 @@ const Preloader = () => {
     const [fadeOut, setFadeOut] = useState(false);
 
     useEffect(() => {
-        // Start fade out after 2 seconds
         const fadeTimer = setTimeout(() => {
             setFadeOut(true);
         }, 2000);
 
-        // Remove preloader after fade animation
         const removeTimer = setTimeout(() => {
             setIsLoading(false);
         }, 2500);
@@ -25,16 +23,11 @@ const Preloader = () => {
 
     return (
         <div
-            className={`fixed inset-0 z-[100] flex items-center justify-center bg-gradient-to-br from-emerald-950 via-emerald-900 to-green-950 transition-opacity duration-500 ${fadeOut ? 'opacity-0' : 'opacity-100'
+            className={`fixed inset-0 z-[100] flex items-center justify-center bg-gradient-to-br from-[hsl(220,20%,5%)] via-[hsl(220,20%,7%)] to-[hsl(220,18%,10%)] transition-opacity duration-500 ${fadeOut ? 'opacity-0' : 'opacity-100'
                 }`}
         >
-            {/* Background pattern */}
-            <div className="absolute inset-0 opacity-10">
-                <div className="absolute inset-0" style={{
-                    backgroundImage: `radial-gradient(circle at 25% 25%, rgba(255,255,255,0.1) 0%, transparent 50%),
-                           radial-gradient(circle at 75% 75%, rgba(255,255,255,0.1) 0%, transparent 50%)`
-                }} />
-            </div>
+            {/* Gold glow effect */}
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,hsl(38,75%,55%,0.08),transparent_60%)]" />
 
             {/* Content */}
             <div className="relative text-center">
@@ -49,12 +42,12 @@ const Preloader = () => {
 
                 {/* Business Name */}
                 <h1
-                    className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3"
+                    className="text-3xl sm:text-4xl md:text-5xl font-bold text-[hsl(40,15%,95%)] mb-3"
                     style={{ fontFamily: "'Playfair Display', serif" }}
                 >
                     Satya Anand
                 </h1>
-                <p className="text-lg sm:text-xl text-emerald-300 font-medium tracking-widest uppercase mb-8">
+                <p className="text-lg sm:text-xl text-[hsl(38,75%,55%)] font-medium tracking-widest uppercase mb-8">
                     Cottage
                 </p>
 
@@ -63,15 +56,15 @@ const Preloader = () => {
                     {[0, 1, 2].map((i) => (
                         <div
                             key={i}
-                            className="w-2 h-2 bg-emerald-400 rounded-full animate-bounce"
+                            className="w-2 h-2 bg-[hsl(38,75%,55%)] rounded-full animate-bounce"
                             style={{ animationDelay: `${i * 0.15}s` }}
                         />
                     ))}
                 </div>
 
                 {/* Tagline */}
-                <p className="mt-6 text-sm text-emerald-200/70 tracking-wide">
-                    Pure Vegetarian Mountain Retreat
+                <p className="mt-6 text-sm text-[hsl(40,10%,50%)] tracking-wide">
+                    Pure Veg and Non-Alcoholic Hotel
                 </p>
             </div>
         </div>

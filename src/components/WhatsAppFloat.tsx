@@ -36,7 +36,12 @@ Please let me know about available rooms and rates. Thank you!`;
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
+    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end gap-3">
+      {/* Demo Watermark */}
+      <div className="bg-[hsl(220,20%,7%)]/90 backdrop-blur-sm border border-[hsl(38,75%,55%)]/30 text-[hsl(38,75%,55%)] text-xs font-medium px-3 py-1.5 rounded-full shadow-lg">
+        ✨ Demo Website
+      </div>
+
       {/* Instagram Button */}
       <button
         onClick={handleInstagramClick}
